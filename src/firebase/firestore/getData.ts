@@ -4,12 +4,12 @@ import { getFirestore, collection, getDocs } from "firebase/firestore";
 const db = getFirestore(firebase_app);
 
 export default async function getAllDocuments(collectionName: string): Promise<{
-  results: { id: string; name: string; email: string }[];
+  results: { id: string; name: string; email: string }[]; // eslint disbale-next-line
   error: any | null;
 }> {
   const collectionRef = collection(db, collectionName);
 
-  let results: { id: string; name: string; email: string }[] = [];
+  let results: { id: string; name: string; email: string }[] = []; // eslint disbale-next-line
   let error: any | null = null;
 
   try {

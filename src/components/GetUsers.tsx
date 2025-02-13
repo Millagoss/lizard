@@ -1,7 +1,6 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import getDoument from "@/firebase/firestore/getData";
 import getAllDocuments from "@/firebase/firestore/getData";
 
 type User = {
@@ -18,7 +17,7 @@ export default function GetUsers() {
   useEffect(() => {
     setLoading(true);
     const fetchUsers = async () => {
-      const { results, error } = await getAllDocuments("users");
+      const { results } = await getAllDocuments("users");
       console.log(results, "rsssssss");
       if (results) {
         setUsers(results);
