@@ -1,18 +1,28 @@
 import firebase_app from "../config";
-import { getFirestore, doc, getDoc } from "firebase/firestore";
+import { getFirestore, collection, getDocs } from "firebase/firestore";
 
 const db = getFirestore(firebase_app);
-export default async function getDoument(collection: string, id: string) {
-  let docRef = doc(db, collection, id);
 
-  let result = null;
-  let error = null;
+export default async function getAllDocuments(collectionName: string): Promise<{
+  results: { id: string; name: string; email: string }[];
+  error: any | null;
+}> {
+  const collectionRef = collection(db, collectionName);
+
+  let results: { id: string; name: string; email: string }[] = [];
+  let error: any | null = null;
 
   try {
-    result = await getDoc(docRef);
+    const querySnapshot = await getDocs(collectionRef);
+    results = querySnapshot.docs.map((doc) => ({
+      id: doc.id,
+      name: doc.data().name,
+      email: doc.data().email,
+    })); //added id to the results
   } catch (e) {
     error = e;
+    console.error("Error fetching documents:", e);
   }
 
-  return { result, error };
+  return { results, error };
 }
