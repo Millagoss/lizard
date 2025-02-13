@@ -6,8 +6,12 @@ import firebase_app from "@/firebase/config";
 
 const auth = getAuth(firebase_app);
 
-export const AuthContext = React.createContext<{ user: User | null }>({
+export const AuthContext = React.createContext<{
+  user: User | null;
+  logout: () => Promise<void>;
+}>({
   user: null,
+  logout: async () => {},
 });
 
 export const useAuthContext = () => React.useContext(AuthContext);
@@ -15,6 +19,10 @@ export const useAuthContext = () => React.useContext(AuthContext);
 export const AuthContextProvider = ({ children }: { children: ReactNode }) => {
   const [user, setUser] = useState<User | null>(null);
   const [loading, setLoading] = useState(true);
+
+  const logout = async () => {
+    await auth.signOut();
+  };
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
@@ -27,10 +35,10 @@ export const AuthContextProvider = ({ children }: { children: ReactNode }) => {
     });
 
     return () => unsubscribe();
-  }, []);
-
+  }, [onAuthStateChanged]);
+  console.log(user, "user");
   return (
-    <AuthContext.Provider value={{ user }}>
+    <AuthContext.Provider value={{ user, logout }}>
       {loading ? <div>Loading...</div> : children}
     </AuthContext.Provider>
   );

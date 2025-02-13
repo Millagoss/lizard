@@ -11,7 +11,17 @@ function Page() {
     if (user == null) router.push("/");
   }, [user]);
 
-  return <h1>Only logged in users can view this page</h1>;
+  return (
+    <>
+      <div className="text-center text-4xl w-full">
+        <h1 className="">Only logged in users can view this page</h1>
+
+        <a className="text-lg text-blue-400 underline" href="/">
+          go to home
+        </a>
+      </div>
+    </>
+  );
 }
 
 export default Page;
