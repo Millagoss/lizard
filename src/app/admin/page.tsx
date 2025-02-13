@@ -2,6 +2,7 @@
 import React from "react";
 import { useAuthContext } from "@/context/AuthContext";
 import { useRouter } from "next/navigation";
+import Link from "next/link";
 function Page() {
   const { user } = useAuthContext();
 
@@ -16,9 +17,9 @@ function Page() {
       <div className="text-center text-4xl w-full">
         <h1 className="">Only logged in users can view this page</h1>
 
-        <a className="text-lg text-blue-400 underline" href="/">
+        <Link className="text-lg text-blue-400 underline" href="/">
           go to home
-        </a>
+        </Link>
       </div>
     </>
   );

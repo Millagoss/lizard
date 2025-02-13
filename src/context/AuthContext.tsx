@@ -35,7 +35,7 @@ export const AuthContextProvider = ({ children }: { children: ReactNode }) => {
     });
 
     return () => unsubscribe();
-  }, [onAuthStateChanged]);
+  }, []);
   console.log(user, "user");
   return (
     <AuthContext.Provider value={{ user, logout }}>
