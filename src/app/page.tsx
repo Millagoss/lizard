@@ -8,7 +8,10 @@ export default function Home() {
   const [body, setBody] = useState("");
 
   return (
-    <div className="flex">
+    <div>
+      <div className="h-16 p-4 flex items-center border-b border-gray-200 w-full">
+        <h1 className="text-xl font-bold">Firebase Demo</h1>
+      </div>
       <div className="w-44 py-4 min-h-screen h-full border-r border-gray-300">
         <h1
           className={`hover:bg-gray-600 p-3 cursor-pointer transition-all ${
